@@ -1,0 +1,8 @@
+center a div
+https://youtube.com/shorts/P7tKk6vqgIo?feature=share
+
+display:grid;
+place-items:center;
+
+//box shadow
+https://getcssscan.com/css-box-shadow-examples

@@ -1,0 +1,82 @@
+npm create vite@latest
+proceed -y
+choose your project name
+select react
+select typescript
+
+navigate to project folder
+npm i (install npm libraries)
+
+To run the app - npm run dev
+
+//Conditional rendering
+You cannot use other html and react elements within return statement 
+Instead of using ternary operator for inline ifelse use &&
+
+eg true && 'msg' return msg
+eg2 false && 'msg' return false
+{items.length===0 && <p>No Items</p>}
+
+
+
+//Handling events
+ onClick={()=>console.log(item)}
+
+State is used to store and manage data that can change over time, and it triggers re-renders of the component when the state is updated.
+useState return current variable, updater function 
+// Using useState to create a state variable named "count" initialized with 0
+  const [count, setCount] = useState(0);
+//Each element/componenent has separate state 
+
+const [selectedIndex, setSelectedIndex] = useState(-1);
+<ul className="list-group">
+        {items.map((item,index) => (
+          <li key={item} className={selectedIndex==index?"list-group-item active":"list-group-item"} 
+              onClick={()=>setSelectedIndex(index)}>
+            {item}
+          </li>
+        ))}
+</ul>
+
+
+//Creating property for a components declared outside the function using interface (Immutable )
+
+interface Props{
+items:string[],
+heading:string
+}
+
+Never change the values of Props interface inside the component function 
+
+//To access inidivial properties separately use their name within curly braces {} --> {items,heading}: interface name
+
+//Passing function through interface Props
+interface Props{
+  items:string[],
+  heading:string,
+  onSelectItem:(item:string)=>void
+};
+
+function ListGroup({items,heading,onSelectItem}:Props)
+
+ onClick={()=>{
+                setSelectedIndex(index);
+                onSelectItem(item);
+                }}
+
+
+//Passing children data without html tags through the component
+interface Props{
+    children:string
+}
+//App.tsx
+    <Alert>Welcome Rohit</Alert>
+
+
+//Passing children data without html tags through the component
+
+interface Props{
+    children:ReactNode 
+}
+//App.tsx
+    <Alert>Welcome <b>Rohit</b></Alert>

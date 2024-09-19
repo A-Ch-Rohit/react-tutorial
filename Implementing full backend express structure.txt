@@ -1,0 +1,6 @@
+Implementing full backend express project
+$ npx express-generator
+For earlier Node versions, install the application generator as a global npm package and then launch it:
+
+$ npm install -g express-generator
+$ express

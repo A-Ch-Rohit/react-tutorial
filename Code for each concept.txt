@@ -1,0 +1,183 @@
+import { useState } from "react";
+
+function ListGroup() {
+  let items = ["Chennai", "Madurai", "Tirunelveli", "Coimbatore"];
+  //items=[];
+  let getItems=()=>{
+    return items.length===0 && <p>No Items found</p>;
+  }
+  var [selectedIndex,setSelectedIndex]=useState(-1);
+  return (
+    <>
+      <h1>ListGroup</h1>
+
+      <h4>Concise Coding- Without ternary operator and using function for conditional rendering</h4>
+      {getItems()}
+      {items.length===0?<p>No Items Found</p>:null}
+      <h4>Without ternary operator and without function for conditional rendering</h4>
+      {items.length===0&&<p>No Items Found</p>}
+      
+      <ul className="list-group">
+        {items.map((item,index) => (
+          <li key={item} className={selectedIndex==index?"list-group-item active":"list-group-item"} 
+              onClick={()=>setSelectedIndex(index)}>
+            {item}
+          </li>
+        ))}
+        <li className="list-group-item">A</li>
+        <li className="list-group-item">B</li>
+        <li className="list-group-item">C</li>
+        <li className="list-group-item">D</li>
+      </ul>
+    </>
+  );
+}
+export default ListGroup;
+
+
+
+//After props
+import { useState } from "react";
+
+interface Props{
+  items:string[],
+  heading:string
+};
+
+function ListGroup({items,heading}:Props) {
+  //let items = ["Chennai", "Madurai", "Tirunelveli", "Coimbatore"];
+  //items=[];
+  /*let getItems=()=>{
+    return items.length===0 && <p>No Items found</p>;
+  }*/
+
+  var [selectedIndex,setSelectedIndex]=useState(-1);
+  return (
+    <>
+      <h1>{heading}</h1>
+
+      <h4>Concise Coding- Without ternary operator and using function for conditional rendering</h4>
+      {items.length===0?<p>No Items Found</p>:null}
+      <h4>Without ternary operator and without function for conditional rendering</h4>
+      {items.length===0&&<p>No Items Found</p>}
+      
+      <ul className="list-group">
+        {items.map((item,index) => (
+          <li key={item} className={selectedIndex==index?"list-group-item active":"list-group-item"} 
+              onClick={()=>setSelectedIndex(index)}>
+            {item}
+          </li>
+        ))}
+        <li className="list-group-item">A</li>
+        <li className="list-group-item">B</li>
+        <li className="list-group-item">C</li>
+        <li className="list-group-item">D</li>
+      </ul>
+    </>
+  );
+}
+export default ListGroup;
+
+//App.tsx
+import Message from './Message'
+import ListGroup from './components/ListGroup';
+export default function App(){
+let items=['Chennai','Madurai','Tirunelveli','Coimbatore']
+  return <div>
+    <ListGroup items={items} heading="Cities"></ListGroup>
+    <Message></Message>
+    </div>;
+}
+
+
+//Passing function through interface Props
+import { useState } from "react";
+
+interface Props{
+  items:string[],
+  heading:string,
+  onSelectItem:(item:string)=>void
+};
+
+function ListGroup({items,heading,onSelectItem}:Props) {
+  //let items = ["Chennai", "Madurai", "Tirunelveli", "Coimbatore"];
+  //items=[];
+  /*let getItems=()=>{
+    return items.length===0 && <p>No Items found</p>;
+  }*/
+
+  var [selectedIndex,setSelectedIndex]=useState(-1);
+  return (
+    <>
+      <h1>{heading}</h1>
+
+      <h4>Concise Coding- Without ternary operator and using function for conditional rendering</h4>
+      {items.length===0?<p>No Items Found</p>:null}
+      <h4>Without ternary operator and without function for conditional rendering</h4>
+      {items.length===0&&<p>No Items Found</p>}
+      
+      <ul className="list-group">
+        {items.map((item,index) => (
+          <li key={item} className={selectedIndex==index?"list-group-item active":"list-group-item"} 
+              onClick={()=>{
+                setSelectedIndex(index);
+                onSelectItem(item);
+                }}>
+            {item}
+          </li>
+        ))}
+        <li className="list-group-item">A</li>
+        <li className="list-group-item">B</li>
+        <li className="list-group-item">C</li>
+        <li className="list-group-item">D</li>
+      </ul>
+    </>
+  );
+}
+export default ListGroup;
+
+//App.tsx
+import Message from './Message'
+import ListGroup from './components/ListGroup';
+export default function App(){
+let items=['Chennai','Madurai','Tirunelveli','Coimbatore']
+const handleEvent =(item:string)=>{
+  console.log(item)
+}
+  return <div>
+    <ListGroup items={items} heading="Cities" onSelectItem={handleEvent}></ListGroup>
+    <Message></Message>
+    </div>;
+}
+
+
+//Passing children data without html tags through the component
+import {ReactNode} from 'react'
+interface Props{
+    children:string -without html tags as children and only strings
+}
+function Alert({children}:Props){
+    return(
+        <div className="alert alert-primary">{children}</div>
+    )
+}
+
+export default Alert;
+// App.tsx
+<Alert>Welcome Rohit</Alert>
+
+
+//Passing children data with html tags through the component
+import {ReactNode} from 'react'
+interface Props{
+    children:ReactNode //-with html tags as children and strings
+}
+function Alert({children}:Props){
+    return(
+        <div className="alert alert-primary">{children}</div>
+    )
+}
+
+export default Alert;
+//App.tsx
+ <Alert>Welcome <b>Rohit</b></Alert>
